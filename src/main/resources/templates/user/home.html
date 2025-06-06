@@ -503,7 +503,6 @@
                     <li><a href="#home">Beranda</a></li>
                     <li><a href="#products">Produk</a></li>
                     <li><a href="#categories">Kategori</a></li>
-                    <li><a href="#deals">Promo</a></li>
                     <li><a href="#contact">Kontak</a></li>
                 </ul>
             </nav>
@@ -513,14 +512,18 @@
                 <button class="search-btn">🔍</button>
             </div>
 
+            <!-- PERBAIKAN -->
             <div class="cart-icon">
-                🛒
-                <span class="cart-count">3</span>
+                <a href="/cart" style="color: white; text-decoration: none;">
+                    <span>🛒</span>
+                    <span class="cart-count" th:text="${session.cartCount ?: 0}">3</span>
+                </a>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
+    <section id="home" class="home"></section>
     <section class="hero">
         <div class="hero-content">
             <h1>Toko Elektronik Terpercaya</h1>
@@ -530,7 +533,8 @@
     </section>
 
     <!-- Categories -->
-    <section class="categories">
+    <section id="categories" class="categories">   
+     <section class="categories">
         <div class="container">
             <h2 class="section-title">Kategori Produk</h2>
             <div class="category-grid">
@@ -569,7 +573,8 @@
     </section>
 
     <!-- Featured Products -->
-    <section class="featured-products">
+    <section id="products" class="products"> 
+     <section class="featured-products">
         <div class="container">
             <h2 class="section-title">Produk Unggulan</h2>
             <div class="product-grid">
@@ -582,8 +587,14 @@
                             <span class="stars">⭐⭐⭐⭐⭐</span>
                             <span>(4.8)</span>
                         </div>
-                        <button class="add-to-cart">Tambah ke Keranjang</button>
-                    </div>
+                            <form action="/cart/add" method="post" style="display: inline;">
+                                <input type="hidden" name="productId" value="1"> <!-- ID produk -->
+                                <input type="hidden" name="productName" value="iPhone 15 Pro Max">
+                                <input type="hidden" name="productPrice" value="18999000">
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="add-to-cart">Tambah ke Keranjang</button>
+                            </form>                  
+                        </div>
                 </div>
                 <div class="product-card">
                     <div class="product-image">💻</div>
@@ -594,7 +605,13 @@
                             <span class="stars">⭐⭐⭐⭐⭐</span>
                             <span>(4.9)</span>
                         </div>
-                        <button class="add-to-cart">Tambah ke Keranjang</button>
+                        <form action="/cart/add" method="post" style="display: inline;">
+                            <input type="hidden" name="productId" value="1"> <!-- ID produk -->
+                            <input type="hidden" name="productName" value="iPhone 15 Pro Max">
+                            <input type="hidden" name="productPrice" value="18999000">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="add-to-cart">Tambah ke Keranjang</button>
+                        </form>
                     </div>
                 </div>
                 <div class="product-card">
@@ -606,7 +623,13 @@
                             <span class="stars">⭐⭐⭐⭐⭐</span>
                             <span>(4.7)</span>
                         </div>
-                        <button class="add-to-cart">Tambah ke Keranjang</button>
+                        <form action="/cart/add" method="post" style="display: inline;">
+                            <input type="hidden" name="productId" value="1"> <!-- ID produk -->
+                            <input type="hidden" name="productName" value="iPhone 15 Pro Max">
+                            <input type="hidden" name="productPrice" value="18999000">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="add-to-cart">Tambah ke Keranjang</button>
+                        </form>
                     </div>
                 </div>
                 <div class="product-card">
@@ -618,15 +641,21 @@
                             <span class="stars">⭐⭐⭐⭐⭐</span>
                             <span>(4.6)</span>
                         </div>
-                        <button class="add-to-cart">Tambah ke Keranjang</button>
+                        <form action="/cart/add" method="post" style="display: inline;">
+                            <input type="hidden" name="productId" value="1"> <!-- ID produk -->
+                            <input type="hidden" name="productName" value="iPhone 15 Pro Max">
+                            <input type="hidden" name="productPrice" value="18999000">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="add-to-cart">Tambah ke Keranjang</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Newsletter -->
-    <section class="newsletter">
+    <!-- Newsletter --> 
+     <section class="newsletter">
         <div class="container">
             <h3>Dapatkan Penawaran Terbaru</h3>
             <p>Berlangganan newsletter kami untuk mendapatkan info promo dan produk terbaru</p>
@@ -638,7 +667,8 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <section id="contact" class="contact"> 
+     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
