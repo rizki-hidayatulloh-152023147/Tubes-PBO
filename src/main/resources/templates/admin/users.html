@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Manajemen Pengguna</title>
+</head>
+<body>
+    <h1>Daftar Pengguna</h1>
+    <a href="/admin/users/add">➕ Tambah User</a>
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Role</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.password}"></td>
+                <td th:text="${user.role}"></td>
+                <td>
+                    <a th:href="@{/admin/users/edit/{id}(id=${user.id})}">✏️ Edit</a> |
+                    <a th:href="@{/admin/users/delete/{id}(id=${user.id})}" onclick="return confirm('Hapus user ini?')">🗑️ Hapus</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

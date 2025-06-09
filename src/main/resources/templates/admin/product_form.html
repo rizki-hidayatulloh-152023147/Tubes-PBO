@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Produk</title>
+</head>
+<body>
+    <h1 th:text="${product.id != null} ? 'Edit Produk' : 'Tambah Produk'"></h1>
+    <form th:action="@{/admin/products/save}" th:object="${product}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <p>
+            <label>Nama Produk:</label><br>
+            <input type="text" th:field="*{name}" required />
+        </p>
+        <p>
+            <label>Deskripsi:</label><br>
+            <textarea th:field="*{description}" required></textarea>
+        </p>
+        <p>
+            <label>Harga:</label><br>
+            <input type="number" step="0.01" th:field="*{price}" required />
+        </p>
+        <button type="submit">💾 Simpan</button>
+        <a href="/admin/products">Kembali</a>
+    </form>
+</body>
+</html>

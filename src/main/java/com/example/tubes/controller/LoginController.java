@@ -33,7 +33,7 @@ public class LoginController {
             if ("ADMIN".equalsIgnoreCase(role)) {
                 return "redirect:/admin/dashboard";
             } else if ("USER".equalsIgnoreCase(role)) {
-                return "redirect:/user/home";
+                return "redirect:/home";
             } else {
                 model.addAttribute("error", "Role tidak dikenali");
                 return "login";
@@ -72,10 +72,6 @@ public class LoginController {
         return "admin/dashboard";
     }
 
-    @GetMapping("/user/home")
-    public String userHome() {
-        return "user/home";
-    }
 
     // ✅ Logout
     @GetMapping("/logout")
