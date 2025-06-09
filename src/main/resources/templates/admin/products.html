@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Daftar Produk</title>
 </head>
 <body>
     <h1>Daftar Produk</h1>
+
     <a href="/admin/products/add">➕ Tambah Produk</a>
+
     <table border="1" cellpadding="10">
         <thead>
             <tr>
@@ -14,6 +15,7 @@
                 <th>Nama</th>
                 <th>Deskripsi</th>
                 <th>Harga</th>
+                <th>Stok</th> <!-- Tambahan -->
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -23,9 +25,10 @@
                 <td th:text="${product.name}"></td>
                 <td th:text="${product.description}"></td>
                 <td th:text="${product.price}"></td>
+                <td th:text="${product.stock}"></td> <!-- Tampilkan stok -->
                 <td>
-                    <a th:href="@{/admin/products/edit/{id}(id=${product.id})}">✏️ Edit</a> |
-                    <a th:href="@{/admin/products/delete/{id}(id=${product.id})}" onclick="return confirm('Yakin ingin hapus?')">🗑️ Hapus</a>
+                    <a th:href="@{'/admin/products/edit/' + ${product.id}}">✏️ Edit</a> |
+                    <a th:href="@{'/admin/products/delete/' + ${product.id}}" onclick="return confirm('Yakin ingin menghapus?')">🗑️ Hapus</a>
                 </td>
             </tr>
         </tbody>

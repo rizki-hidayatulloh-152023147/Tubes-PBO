@@ -13,13 +13,17 @@ public class Product {
     private String description;
     private double price;
 
+    // Tambahan: field stok
+    private int stock;
+
     // Constructors
     public Product() {}
 
-    public Product(String name, String description, double price) {
+    public Product(String name, String description, double price, int stock) {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.stock = stock;
     }
 
     // Getters & Setters
@@ -49,5 +53,14 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    // Getter & Setter untuk stok
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 }

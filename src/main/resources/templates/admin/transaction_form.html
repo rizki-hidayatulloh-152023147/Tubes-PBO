@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${transaction.id != null ? 'Edit Transaction' : 'Add Transaction'}"></title>
+</head>
+<body>
+<h1 th:text="${transaction.id != null ? 'Edit Transaction' : 'Add Transaction'}"></h1>
+
+<form th:action="@{/admin/transactions/save}" th:object="${transaction}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+
+    <label>Product:</label>
+<select th:field="*{productId}">
+    <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"
+            th:selected="${product.id == transaction.product?.id}"></option>
+</select><br/>
+
+<label>User:</label>
+<select th:field="*{userId}">
+    <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}"
+            th:selected="${user.id == transaction.user?.id}"></option>
+</select><br/>
+    <label>Quantity:</label>
+    <input type="number" th:field="*{quantity}" required/><br/>
+
+    <label>Total Price:</label>
+    <input type="number" step="0.01" th:field="*{totalPrice}" required/><br/>
+
+    <button type="submit">Save</button>
+</form>
+
+<a th:href="@{/admin/transactions}">Back to List</a>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Pembelian</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">TokoKu</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDropdown"
+                aria-controls="navbarDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Akun
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                        <li><a class="dropdown-item" th:href="@{/profile}">Profil</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" th:href="@{/logout}">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Form Pembelian -->
+<div class="container mt-5">
+    <div class="card shadow-sm mx-auto" style="max-width: 500px;">
+        <div class="card-body">
+            <h3 class="card-title text-center mb-4">Form Pembelian</h3>
+
+            <form action="/user/buy" method="post">
+                <!-- Product ID (hidden) -->
+                <input type="hidden" name="productId" th:value="${product.id}" />
+
+                <!-- User ID (hidden - nanti ganti dari session) -->
+                <input type="hidden" name="userId" value="1" />
+
+                <!-- Nama Produk -->
+                <div class="mb-3">
+                    <label class="form-label">Produk:</label>
+                    <p class="form-control-plaintext fw-bold" th:text="${product.name}">Nama Produk</p>
+                </div>
+
+                <!-- Harga Produk -->
+                <div class="mb-3">
+                    <label class="form-label">Harga:</label>
+                    <p class="form-control-plaintext text-success" th:text="'Rp ' + ${product.price}">Harga</p>
+                </div>
+
+                <!-- Jumlah -->
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Jumlah:</label>
+                    <input type="number" class="form-control" id="quantity" name="quantity" min="1" required />
+                </div>
+
+                <!-- Tombol Submit -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Beli Sekarang</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

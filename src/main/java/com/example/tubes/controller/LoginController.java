@@ -33,7 +33,7 @@ public class LoginController {
             if ("ADMIN".equalsIgnoreCase(role)) {
                 return "redirect:/admin/dashboard";
             } else if ("USER".equalsIgnoreCase(role)) {
-                return "redirect:/home";
+                return "redirect:/user/shop";
             } else {
                 model.addAttribute("error", "Role tidak dikenali");
                 return "login";

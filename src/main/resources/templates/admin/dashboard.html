@@ -16,7 +16,7 @@
             max-width: 800px;
             margin: auto;
         }
-        h1 {
+        h1, h2 {
             text-align: center;
             color: #333;
         }
@@ -44,6 +44,20 @@
         .card:hover {
             background-color: #0056b3;
         }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 40px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -59,8 +73,36 @@
             <a href="/" class="card">
                 🏠 Halaman Utama
             </a>
-            <!-- Tambahkan lebih banyak menu jika perlu -->
+             <a href="/admin/transactions" class="card">
+                transaksi
+            </a>
         </div>
+
+        <!-- ✅ Tambahan Riwayat Transaksi -->
+        <h2>Riwayat Transaksi</h2>
+        <div th:if="${#lists.isEmpty(transactions)}">
+            <p style="text-align: center;">Belum ada transaksi.</p>
+        </div>
+        <table th:if="${!#lists.isEmpty(transactions)}">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Produk</th>
+                    <th>Jumlah</th>
+                    <th>Total Harga</th>
+                    <th>Tanggal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="t : ${transactions}">
+                    <td th:text="${t.user.username}"></td>
+                    <td th:text="${t.product.name}"></td>
+                    <td th:text="${t.quantity}"></td>
+                    <td th:text="${t.totalPrice}"></td>
+                    <td th:text="${#temporals.format(t.transactionDate, 'dd-MM-yyyy HH:mm')}"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>

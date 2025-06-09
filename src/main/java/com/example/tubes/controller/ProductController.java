@@ -18,7 +18,7 @@ public class ProductController {
     @GetMapping
     public String listProducts(Model model) {
         model.addAttribute("products", productRepository.findAll());
-        return "admin/products"; // nanti buat file templates/admin/products.html
+        return "admin/products"; // templates/admin/products.html
     }
 
     // Menampilkan form tambah produk
@@ -28,22 +28,37 @@ public class ProductController {
         return "admin/product_form";
     }
 
-    // Menyimpan produk baru
+    // Menyimpan produk baru atau update
     @PostMapping("/save")
-    public String saveProduct(@ModelAttribute Product product) {
+public String saveProduct(@ModelAttribute("product") Product product) {
+    if (product.getId() != null) {
+        // Update
+        Product existingProduct = productRepository.findById(product.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid product Id:" + product.getId()));
+        existingProduct.setName(product.getName());
+        existingProduct.setDescription(product.getDescription());
+        existingProduct.setPrice(product.getPrice());
+        existingProduct.setStock(product.getStock());
+        productRepository.save(existingProduct);
+    } else {
+        // Insert baru
         productRepository.save(product);
-        return "redirect:/admin/products";
     }
+
+    return "redirect:/admin/products";
+}
 
     // Menampilkan form edit
     @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model) {
-        Product product = productRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid product Id:" + id));
-        model.addAttribute("product", product);
-        return "admin/product_form";
-    }
+public String showEditForm(@PathVariable Long id, Model model) {
+    Product product = productRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("Invalid product Id:" + id));
+    System.out.println("Edit Product ID: " + product.getId());
+    model.addAttribute("product", product);
+    return "admin/product_form";
+}
 
-    // Hapus produk
+    // Menghapus produk
     @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
         productRepository.deleteById(id);
